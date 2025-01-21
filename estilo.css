@@ -1,0 +1,70 @@
+
+:root {
+    --cor-background: #e2e8f0;
+    --cor-texto: #404040;
+    --cor-primaria: #475569;
+    --cor-secundaria: #cbd5e1;
+    --cor-tarefas: #f6f6f6;
+    --cor-cancelar: #e5e7eb;
+    --cor-confirmar: #dc2626;
+    --cor-confirmar-hover: #b91c1c;
+    --tamanho-tarefa: 48px;
+}
+
+/*O seletor universal * - Ele seleciona todos os elementos HTML da página.*/
+* {
+    font-family: Mulish, sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--cor-background);
+    color: var(--cor-texto);
+    min-height: 100vh; /*define a altura mínima de um elemento como 100% da altura da janela de visualização (viewport).*/
+    display: grid; /*transforma o elemento em um container de grid, permitindo que você organize os seus filhos (elementos dentro do grid) em linhas e colunas.*/
+    grid-template-rows: auto 1fr; /*define como as linhas do grid devem ser distribuídas.*/
+}
+
+h1 {
+    margin: 2rem 0;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    outline: 1px solid var(--cor-secundaria);
+    color: var(--cor-primaria);
+    transition: 0.3s;
+    opacity: 0.5;
+}
+
+button:is(:active, :hover){
+    opacity: 1;
+}
+
+.container{
+    width: min(1200px, 90%);
+    margin: 0 auto;
+}
+
+.colunas {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.coluna {
+    flex: 1;
+    display: grid;
+    grid-template-rows: var(--tamanho-tarefa) 1fr;
+    gap: 0.5rem;
+}
+
+.titulo-coluna{
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--cor-secundaria);
+    color: var(--cor-primaria);
+}
