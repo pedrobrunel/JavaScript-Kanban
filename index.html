@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="estilo.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
 
 </head>
 <body>
@@ -21,7 +22,34 @@
                 <h3 data-tarefas="0">Pendente</h3>
                 <button data-adicionar><i class="bi bi-plus"></i></button>
             </div>
-            <div class="tarefas"></div>
+            <div class="tarefas">
+<!-- 
+                <div class="tarefa" draggable="true">
+                    <div>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</div>
+                    <menu>
+                        <button data-editar><i class="bi bi-pencil-square"></i></button>
+                        <button data-deletar><i class="bi bi-trash"></i></button>
+                    </menu>
+                </div>
+
+                <div class="tarefa dragging" draggable="true">
+                    <div>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</div>
+                    <menu>
+                        <button data-editar><i class="bi bi-pencil-square"></i></button>
+                        <button data-deletar><i class="bi bi-trash"></i></button>
+                    </menu>
+                </div>
+
+                <div class="tarefa" draggable="true">
+                    <div>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</div>
+                    <menu>
+                        <button data-editar><i class="bi bi-pencil-square"></i></button>
+                        <button data-deletar><i class="bi bi-trash"></i></button>
+                    </menu>
+                </div>
+-->
+
+            </div>
         </div>
 
         <div class="coluna">
@@ -29,7 +57,20 @@
                 <h3 data-tarefas="0">Em Progresso</h3>
                 <button data-adicionar><i class="bi bi-plus"></i></button>
             </div>
-            <div class="tarefas"></div>
+            <div class="tarefas">
+
+<!--                 <div class="tarefa" draggable="true">
+                    <div>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</div>
+                    <menu>
+                        <button data-editar><i class="bi bi-pencil-square"></i></button>
+                        <button data-deletar><i class="bi bi-trash"></i></button>
+                    </menu>
+                </div>
+
+                <div class="tarefa-input" contenteditable="true" data-placeholder="Nome da tarefa"></div>
+-->
+
+            </div>
         </div>
 
         <div class="coluna">
@@ -41,6 +82,17 @@
         </div>
     </div>
 
+    <dialog class="janela-confirmacao">
+        <form method="dialog">
+            <h3> Deletar Tarefa?</h3>
+            <p>Você quer deletar a tarefa ff.?</p>
+            <div class="visualizarTarefa">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum corporis excepturi, incidunt omnis nesciunt rerum architecto reprehenderit a eum repellat reiciendis assumenda repudiandae deleniti deserunt. Dolore, voluptatibus? Ab, doloribus quidem!</div>
+            <menu>
+                <button type="button" id="cancelar">Cancelar</button>
+                <button type="submit" id="confirmar">Deletar</button>
+            </menu>
+        </form>
+    </dialog>
     
 </body>
 </html>

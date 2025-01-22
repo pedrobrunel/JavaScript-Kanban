@@ -11,6 +11,17 @@
     --tamanho-tarefa: 48px;
 }
 
+@starting-style{
+    
+    .janela-confirmacao[open]::backdrop{
+        background: rgba(0, 0, 0, 0.25);
+    }
+    
+    /*.janela-confirmacao::backdrop{ */
+        /*background: rgba(0, 0, 0, 0.1);*/
+    /*} */
+}
+
 /*O seletor universal * - Ele seleciona todos os elementos HTML da página.*/
 * {
     font-family: Mulish, sans-serif;
@@ -72,4 +83,158 @@ button:is(:active, :hover){
 .titulo-coluna h3 {
     font-size: 1rem;
     text-transform: uppercase;
+}
+
+/* número no lado do titulo */
+.titulo-coluna h3::after{
+    content: attr(data-tarefas);
+    background: lightblue;
+    margin-left: 0.25rem;
+    border-radius: 0.25rem;
+    padding: 0 0.25rem;
+}
+
+.titulo-coluna button{
+    margin-left: auto; /* o auto puxa o botão pro lado */
+    font-size: 2rem;
+}
+
+.tarefas {
+    min-height: var(--tamanho-tarefa);
+    display: grid; /*um embaixo do outro, se fosse flex seria um no lado do outro */
+    align-content: start;
+    gap: 0.5rem;
+}
+
+.tarefas > * { /*O combinador > especifica que apenas os filhos diretos de .tarefas serão afetados pela regra. */
+    /*Ele não seleciona descendentes mais profundos (ou seja, netos, bisnetos, etc.).*/
+    /*O * é um seletor universal que corresponde a qualquer tipo de elemento.*/
+    background: #fff; /* cor padrão das tarefas */
+    border-radius: 0.25rem;
+    padding: 0.900rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    min-height: var(--tamanho-tarefa);
+}
+
+.tarefa {
+    cursor: move;
+    transition: 0.3s;
+}
+
+.tarefa.dragging {
+    cursor: default;
+    box-shadow: none;
+    background: var(--cor-secundaria);
+    opacity: 0.5;
+}
+
+.tarefa.tarefa.dragging * { /*Seleciona todos os elementos filhos (de qualquer tipo) dentro do elemento correspondente ao seletor .*/
+    visibility: hidden;
+}
+
+.tarefa:not(.dragging):hover{ /*Apenas os elementos .tarefa que não possuem a classe dragging serão afetados. */
+/*:hover: Aplica os estilos quando o cursor do mouse está sobre o elemento.*/
+    background: var(--cor-tarefas);
+}
+
+.tarefa menu { /* referente aos botões da tarefa */
+    margin-top: 0.9rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.tarefa button {
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 1rem;
+}
+
+.tarefa-input {
+    outline: nome;
+    overflow-wrap: anywhere; /* esse aqui não deixa a div crescer para os lados */
+    padding-left: 2.5rem;
+}
+
+.tarefa-input::before {
+    content: "\F392"; /* id do icone no boostrap */
+    font-family: "bootstrap-icons"; 
+    position: absolute; /* deixa alterar o lugar do icone*/
+    left: 0.9rem; /* altera o lugar */
+    top: 50%; /* deixa no meio */
+    transform: translateY(-50%); /* deixa no meio */
+    opacity: 0.5;
+}
+
+.tarefa-input:empty::after {
+    content: attr(data-placeholder);
+    opacity: 0.5;
+
+}
+
+.janela-confirmacao[open] { /*é um seletor de atributo que aplica os estilos ao <dialog> somente quando ele tem o atributo open. */
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(50px);
+    left: 50%;
+    top: 50%;
+    border: none;
+    border-radius: 0.25rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s allow-discrete;
+}
+
+.janela-confirmacao {
+    padding: 2rem;
+}
+
+.janela-confirmacao form > *:not(:last-child){ /*tira os dois botões de baixo - last-child */
+    margin-bottom: 1rem;
+}
+
+.janela-confirmacao h3 {
+    font-size: 1.5rem;
+}
+
+.janela-confirmacao div.visualizarTarefa {
+    font-size: 0.9rem;
+    padding-left: 0.5rem;
+    border-left: 2px solid var(--cor-secundaria);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    /*overflow: hidden;*/
+    opacity: 0.75;
+}
+
+.janela-confirmacao menu{
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 2rem;
+}
+
+.janela-confirmacao button {
+    opacity: 1;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border: 0.25rem;
+    border: 1px solid transparent;
+    box-shadow: 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+}
+
+.janela-confirmacao button#cancelar {
+    border-color: var(--cor-cancelar);
+}
+
+.janela-confirmacao button#confirmar {
+    border-color: var(--cor-confirmar);
+    background: var(--cor-confirmar);
+    color: #fff;
+}
+
+.janela-confirmacao button#confirmar:hover {
+    border-color: var(--cor-confirmar-hover);
+    background: var(--cor-confirmar-hover);
+    color: #fff;
 }
