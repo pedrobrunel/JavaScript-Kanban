@@ -1,8 +1,42 @@
 const janela = document.querySelector('.janela-confirmacao')
 const containerDasColunas = document.querySelector('.colunas')
-const colunas = containerDasColunas.querySelector('.coluna')
+const colunas = containerDasColunas.querySelectorAll('.coluna')
 
 let tarefaAtual = null
+
+const arrastarSoltou = (event) =>{
+    event.target.classList.remove ("dragging")
+}
+
+const arrastarIniciou = (event) => {
+    requestAnimationFrame(() => event.target.classList.add("dragging"))
+}
+
+const arrastando = (event) => {
+    event.preventDefault()
+    const tarefaArrastada = document.querySelector(".dragging")
+    const local = event.target.closest('.tarefa .tarefas')
+
+    if (!local || local === tarefaArrastada) return
+
+
+if (local.classList.contains("tarefas")){
+    local.appendChild(tarefaArrastada)
+} else{
+
+}
+}
+
+const arrastarAcabou = (event) => {
+    event.preventDefault()
+
+}
+
+
+
+
+
+
 
 const handleBlur = (event) => {
     const input = event.target
@@ -35,6 +69,8 @@ const adicionar = (event) => {
 }
 
 
+
+
 const criarTarefa = (conteudo) => {
     const tarefa = document.createElement('div')
     tarefa.className = 'tarefa'
@@ -46,6 +82,9 @@ const criarTarefa = (conteudo) => {
     <button data-deletar><i class="bi bi-trash"></i></button>
     </menu>
     `
+    tarefa.addEventListener('dragstart', arrastarIniciou)
+    tarefa.addEventListener('dragend', arrastarSoltou)
+
     return tarefa
 }
 
@@ -69,7 +108,26 @@ containerDasColunas.addEventListener('click', (event) => {
     }
 })
 
+const contadorDeTarefas = (coluna) => {
+    const tarefas = coluna.querySelector('.tarefas').children
+    const contarTarefas = tarefas.length
+    coluna.querySelector('.titulo-coluna h3').dataset.tarefas = contarTarefas
+}
+
+const olhaAlteracaoTarefa = () => {
+    for (const coluna of colunas){
+        const observar = new MutationObserver(() => contadorDeTarefas(coluna))
+        observar.observe(coluna.querySelector(".tarefas"), { childList: true })
+    }
+}
+
+olhaAlteracaoTarefa()
+
+
 
 janela.addEventListener('submit', () => tarefaAtual && tarefaAtual.remove()) /*Isso significa que, antes de tentar chamar o método remove() na tarefaAtual, você verifica se ela existe e não é null ou undefined. Se tarefaAtual for null ou undefined, a expressão inteira tarefaAtual && tarefaAtual.remove() irá retornar null e a função remove() não será chamada, evitando possíveis erros de tentativa de chamada de método em null ou undefined.*/
 
 janela.querySelector("#cancelar").addEventListener('click', () => janela.close())
+//assim que fechar a janela, ele identifica o close e seta a variavel para null, pra limpar
+janela.addEventListener("close", () => (tarefaAtual = null))
+
